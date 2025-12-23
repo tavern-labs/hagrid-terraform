@@ -6,10 +6,6 @@ on:
   push:
     branches: [ "main" ]
 
-permissions:
-  contents: read
-  pull-requests: write # Allows commenting the plan back to the PR
-
 env:
   TF_VAR_okta_org_name: ${{ secrets.OKTA_ORG_NAME }}
   TF_VAR_okta_base_url: ${{ secrets.OKTA_BASE_URL }}
@@ -22,14 +18,24 @@ jobs:
     name: "Terraform Plan (Preview)"
     runs-on: ubuntu-latest
     if: github.event_name == 'pull_request'
+    permissions:
+      id-token: write   # Required for OIDC to AWS
+      contents: read    # Required to checkout code
+      pull-requests: write # Allows commenting back to PR
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
 
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
         with:
-          terraform_wrapper: false # Better for raw output handling
+          terraform_wrapper: false
 
       - name: Terraform Init
         run: terraform init
@@ -42,10 +48,20 @@ jobs:
   apply:
     name: "Terraform Apply (Production)"
     runs-on: ubuntu-latest
-    if: github.repository == 'tavern-labs/hagrid-terraform' && github.event_name == 'push' && github.ref == 'refs/heads/main'    
+    # Safety Check: Only run on the Org repo, not forks
+    if: github.repository == 'tavern-labs/hagrid-terraform' && github.event_name == 'push' && github.ref == 'refs/heads/main'
+    permissions:
+      id-token: write
+      contents: read
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
+          aws-region: ${{ secrets.AWS_REGION }}
 
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
@@ -53,10 +69,8 @@ jobs:
       - name: Terraform Init
         run: terraform init
 
-      # We generate a fresh plan on the main branch to ensure no drift
       - name: Final Safety Plan
         run: terraform plan -out=deploy.tfplan -input=false
 
-      # We apply the EXACT plan we just generated 2 seconds ago
       - name: Terraform Apply
         run: terraform apply -input=false -auto-approve deploy.tfplan
