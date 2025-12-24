@@ -38,6 +38,17 @@ The `groups.tf` file demonstrates all possible approval patterns:
 
 All application access groups use the `app-` prefix (e.g., `app-jira-user`, `app-aws-admin`) to distinguish them from organizational, security, or other group types.
 
+## Infrastructure Setup
+
+**State Management:** S3 backend with encryption and state locking for secure, collaborative infrastructure management.
+
+**Okta Authentication:** OAuth 2.0 credential exchange using an Okta application configured with:
+- `okta.groups.manage` scope - Create and manage Okta groups
+- `okta.schemas.manage` scope - Define custom group attributes
+- Admin privileges for group schema modifications
+
+This approach uses service account credentials instead of personal API tokens for production-grade security.
+
 ## Files
 
 - `schema.tf` - Okta group schema definitions with custom attributes
