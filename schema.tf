@@ -7,7 +7,7 @@ resource "okta_group_schema_property" "approval_type" {
   master      = "OKTA"
   scope       = "SELF"
 
-  enum = ["MANAGER", "ACCOUNT_ID", "BOTH", "MANUAL", "NONE"]
+  enum = ["MANAGER", "ACCOUNT_EMAIL", "BOTH", "MANUAL", "NONE"]
 
   # This provides the "Human Readable" labels for the Okta UI
   one_of {
@@ -15,12 +15,12 @@ resource "okta_group_schema_property" "approval_type" {
     title = "Manager Approval Only"
   }
   one_of {
-    const = "ACCOUNT_ID"
-    title = "Specific Account IDs"
+    const = "ACCOUNT_EMAIL"
+    title = "Specific Approver Emails"
   }
   one_of {
     const = "BOTH"
-    title = "Manager AND Account ID"
+    title = "Manager AND Approver Emails"
   }
   one_of {
     const = "MANUAL"

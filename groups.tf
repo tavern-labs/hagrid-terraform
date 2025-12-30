@@ -78,11 +78,11 @@ locals {
       approval_threshold = null
     }
 
-    # ACCOUNT_ID - ANY ONE approver (team leads, resource owners)
+    # ACCOUNT_EMAIL - ANY ONE approver (team leads, resource owners)
     app_slack_admin = {
       name               = "app-slack-admin"
       description        = "Slack workspace administrator - any IT admin can approve"
-      approval_type      = "ACCOUNT_ID"
+      approval_type      = "ACCOUNT_EMAIL"
       approval_emails    = ["minerva-mcgonagall@hogwarts.com", "hermione-granger@hogwarts.com"]
       approval_logic     = "ANY"
       approval_threshold = 1
@@ -90,7 +90,7 @@ locals {
     app_confluence_admin = {
       name               = "app-confluence-admin"
       description        = "Confluence space administrator - any platform admin can approve"
-      approval_type      = "ACCOUNT_ID"
+      approval_type      = "ACCOUNT_EMAIL"
       approval_emails    = ["minerva-mcgonagall@hogwarts.com", "hermione-granger@hogwarts.com"]
       approval_logic     = "ANY"
       approval_threshold = 1
@@ -98,17 +98,17 @@ locals {
     app_pagerduty_responder = {
       name               = "app-pagerduty-responder"
       description        = "PagerDuty on-call responder - any SRE lead can approve"
-      approval_type      = "ACCOUNT_ID"
+      approval_type      = "ACCOUNT_EMAIL"
       approval_emails    = ["arthur-weasley@hogwarts.com", "ron-weasley@hogwarts.com", "sirius-black@hogwarts.com"]
       approval_logic     = "ANY"
       approval_threshold = 1
     }
 
-    # ACCOUNT_ID - ANY TWO approvers (higher security, dual approval)
+    # ACCOUNT_EMAIL - ANY TWO approvers (higher security, dual approval)
     app_aws_admin = {
       name               = "app-aws-admin"
       description        = "AWS administrator access - requires two cloud architects"
-      approval_type      = "ACCOUNT_ID"
+      approval_type      = "ACCOUNT_EMAIL"
       approval_emails    = ["albus-dumbledore@hogwarts.com", "arthur-weasley@hogwarts.com", "sirius-black@hogwarts.com"]
       approval_logic     = "ANY"
       approval_threshold = 2
@@ -116,17 +116,17 @@ locals {
     app_datadog_admin = {
       name               = "app-datadog-admin"
       description        = "Datadog admin with billing access - two SRE managers required"
-      approval_type      = "ACCOUNT_ID"
+      approval_type      = "ACCOUNT_EMAIL"
       approval_emails    = ["arthur-weasley@hogwarts.com", "ron-weasley@hogwarts.com", "sirius-black@hogwarts.com"]
       approval_logic     = "ANY"
       approval_threshold = 2
     }
 
-    # ACCOUNT_ID - ALL approvers required (critical access)
+    # ACCOUNT_EMAIL - ALL approvers required (critical access)
     app_jira_system_admin = {
       name               = "app-jira-system-admin"
       description        = "Jira system administrator - all platform leads must approve"
-      approval_type      = "ACCOUNT_ID"
+      approval_type      = "ACCOUNT_EMAIL"
       approval_emails    = ["minerva-mcgonagall@hogwarts.com", "hermione-granger@hogwarts.com"]
       approval_logic     = "ALL"
       approval_threshold = 0
@@ -134,7 +134,7 @@ locals {
     app_github_org_owner = {
       name               = "app-github-org-owner"
       description        = "GitHub organization owner - all engineering directors must approve"
-      approval_type      = "ACCOUNT_ID"
+      approval_type      = "ACCOUNT_EMAIL"
       approval_emails    = ["albus-dumbledore@hogwarts.com", "minerva-mcgonagall@hogwarts.com"]
       approval_logic     = "ALL"
       approval_threshold = 2
@@ -204,7 +204,7 @@ locals {
     app_confluence_space_admin = {
       name               = "app-confluence-space-admin"
       description        = "Confluence space admin - specific platform owner approves"
-      approval_type      = "ACCOUNT_ID"
+      approval_type      = "ACCOUNT_EMAIL"
       approval_emails    = ["hermione-granger@hogwarts.com"]
       approval_logic     = "ANY"
       approval_threshold = 1

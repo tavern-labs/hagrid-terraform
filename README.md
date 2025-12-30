@@ -17,7 +17,7 @@ Four custom attributes enable flexible approval logic:
 
 | Attribute | Type | Description |
 |-----------|------|-------------|
-| `approval_type` | enum | Who must approve: `NONE`, `MANAGER`, `ACCOUNT_ID`, `BOTH`, `MANUAL` |
+| `approval_type` | enum | Who must approve: `NONE`, `MANAGER`, `ACCOUNT_EMAIL`, `BOTH`, `MANUAL` |
 | `approval_emails` | array | List of email addresses authorized to approve |
 | `approval_logic` | enum | `ALL` (AND conditions) or `ANY` (OR conditions) |
 | `approval_threshold` | integer | Number of approvals required (0 with ALL = require all) |
