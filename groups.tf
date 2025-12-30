@@ -2,6 +2,16 @@
 # Application Access Groups - RBAC for AI Agent
 # Apps: Jira, Slack, GitHub, AWS, Confluence, PagerDuty, Datadog
 # Prefix: app- (distinguishes app access groups from org/security/other groups)
+#
+# Organizational Structure (for testing):
+# - albus-dumbledore@hogwarts.com   - CEO/CTO (executive approvals)
+# - minerva-mcgonagall@hogwarts.com - VP Engineering (platform/engineering)
+# - severus-snape@hogwarts.com      - VP Security (security approvals)
+# - arthur-weasley@hogwarts.com     - VP Operations (SRE/ops)
+# - hermione-granger@hogwarts.com   - Director of Platform Engineering
+# - ron-weasley@hogwarts.com        - SRE Manager
+# - sirius-black@hogwarts.com       - DevOps Manager
+# - remus-lupin@hogwarts.com        - Finance Manager
 # =============================================================================
 
 # NO APPROVAL REQUIRED - Self-service access
@@ -81,7 +91,7 @@ resource "okta_group" "app_slack_admin" {
 
   custom_profile_attributes = jsonencode({
     approval_type      = "ACCOUNT_ID"
-    approver_emails    = ["harry-potter@hogwarts.com", "hermione-granger@hogwarts.com", "ron-weasley@hogwarts.com"]
+    approver_emails    = ["minerva-mcgonagall@hogwarts.com", "hermione-granger@hogwarts.com"]
     approval_logic     = "ANY"
     approval_threshold = 1
   })
@@ -93,7 +103,7 @@ resource "okta_group" "app_confluence_admin" {
 
   custom_profile_attributes = jsonencode({
     approval_type      = "ACCOUNT_ID"
-    approver_emails    = ["albus-dumbledore@hogwarts.com", "minerva-mcgonagall@hogwarts.com"]
+    approver_emails    = ["minerva-mcgonagall@hogwarts.com", "hermione-granger@hogwarts.com"]
     approval_logic     = "ANY"
     approval_threshold = 1
   })
@@ -105,7 +115,7 @@ resource "okta_group" "app_pagerduty_responder" {
 
   custom_profile_attributes = jsonencode({
     approval_type      = "ACCOUNT_ID"
-    approver_emails    = ["severus-snape@hogwarts.com", "rubeus-hagrid@hogwarts.com", "sirius-black@hogwarts.com"]
+    approver_emails    = ["arthur-weasley@hogwarts.com", "ron-weasley@hogwarts.com", "sirius-black@hogwarts.com"]
     approval_logic     = "ANY"
     approval_threshold = 1
   })
@@ -119,7 +129,7 @@ resource "okta_group" "app_aws_admin" {
 
   custom_profile_attributes = jsonencode({
     approval_type      = "ACCOUNT_ID"
-    approver_emails    = ["remus-lupin@hogwarts.com", "neville-longbottom@hogwarts.com", "luna-lovegood@hogwarts.com", "ginny-weasley@hogwarts.com"]
+    approver_emails    = ["albus-dumbledore@hogwarts.com", "arthur-weasley@hogwarts.com", "sirius-black@hogwarts.com"]
     approval_logic     = "ANY"
     approval_threshold = 2
   })
@@ -131,7 +141,7 @@ resource "okta_group" "app_datadog_admin" {
 
   custom_profile_attributes = jsonencode({
     approval_type      = "ACCOUNT_ID"
-    approver_emails    = ["fred-weasley@hogwarts.com", "george-weasley@hogwarts.com", "draco-malfoy@hogwarts.com"]
+    approver_emails    = ["arthur-weasley@hogwarts.com", "ron-weasley@hogwarts.com", "sirius-black@hogwarts.com"]
     approval_logic     = "ANY"
     approval_threshold = 2
   })
@@ -145,7 +155,7 @@ resource "okta_group" "app_jira_system_admin" {
 
   custom_profile_attributes = jsonencode({
     approval_type      = "ACCOUNT_ID"
-    approver_emails    = ["cho-chang@hogwarts.com", "cedric-diggory@hogwarts.com", "fleur-delacour@hogwarts.com"]
+    approver_emails    = ["minerva-mcgonagall@hogwarts.com", "hermione-granger@hogwarts.com"]
     approval_logic     = "ALL"
     approval_threshold = 0
   })
@@ -157,7 +167,7 @@ resource "okta_group" "app_github_org_owner" {
 
   custom_profile_attributes = jsonencode({
     approval_type      = "ACCOUNT_ID"
-    approver_emails    = ["viktor-krum@hogwarts.com", "bellatrix-lestrange@hogwarts.com"]
+    approver_emails    = ["albus-dumbledore@hogwarts.com", "minerva-mcgonagall@hogwarts.com"]
     approval_logic     = "ALL"
     approval_threshold = 2
   })
@@ -171,7 +181,7 @@ resource "okta_group" "app_aws_developer" {
 
   custom_profile_attributes = jsonencode({
     approval_type      = "BOTH"
-    approver_emails    = ["molly-weasley@hogwarts.com", "arthur-weasley@hogwarts.com", "percy-weasley@hogwarts.com"]
+    approver_emails    = ["arthur-weasley@hogwarts.com", "sirius-black@hogwarts.com"]
     approval_logic     = "ANY"
     approval_threshold = 1
   })
@@ -183,7 +193,7 @@ resource "okta_group" "app_jira_service_desk_agent" {
 
   custom_profile_attributes = jsonencode({
     approval_type      = "BOTH"
-    approver_emails    = ["oliver-wood@hogwarts.com", "dean-thomas@hogwarts.com"]
+    approver_emails    = ["hermione-granger@hogwarts.com"]
     approval_logic     = "ANY"
     approval_threshold = 1
   })
@@ -195,7 +205,7 @@ resource "okta_group" "app_slack_org_admin" {
 
   custom_profile_attributes = jsonencode({
     approval_type      = "BOTH"
-    approver_emails    = ["seamus-finnigan@hogwarts.com", "lavender-brown@hogwarts.com", "parvati-patil@hogwarts.com"]
+    approver_emails    = ["minerva-mcgonagall@hogwarts.com", "hermione-granger@hogwarts.com"]
     approval_logic     = "ANY"
     approval_threshold = 2
   })
@@ -209,7 +219,7 @@ resource "okta_group" "app_aws_billing_admin" {
 
   custom_profile_attributes = jsonencode({
     approval_type      = "BOTH"
-    approver_emails    = ["padma-patil@hogwarts.com"]
+    approver_emails    = ["remus-lupin@hogwarts.com"]
     approval_logic     = "ALL"
     approval_threshold = 1
   })
@@ -221,7 +231,7 @@ resource "okta_group" "app_github_security_team" {
 
   custom_profile_attributes = jsonencode({
     approval_type      = "BOTH"
-    approver_emails    = ["angelina-johnson@hogwarts.com"]
+    approver_emails    = ["severus-snape@hogwarts.com"]
     approval_logic     = "ALL"
     approval_threshold = 1
   })
@@ -233,7 +243,7 @@ resource "okta_group" "app_pagerduty_admin" {
 
   custom_profile_attributes = jsonencode({
     approval_type      = "BOTH"
-    approver_emails    = ["katie-bell@hogwarts.com", "lee-jordan@hogwarts.com", "colin-creevey@hogwarts.com"]
+    approver_emails    = ["arthur-weasley@hogwarts.com", "ron-weasley@hogwarts.com", "sirius-black@hogwarts.com"]
     approval_logic     = "ALL"
     approval_threshold = 0
   })
@@ -245,7 +255,7 @@ resource "okta_group" "app_datadog_billing_admin" {
 
   custom_profile_attributes = jsonencode({
     approval_type      = "BOTH"
-    approver_emails    = ["dennis-creevey@hogwarts.com", "romilda-vane@hogwarts.com", "cormac-mclaggen@hogwarts.com"]
+    approver_emails    = ["albus-dumbledore@hogwarts.com", "remus-lupin@hogwarts.com"]
     approval_logic     = "ALL"
     approval_threshold = 2
   })
@@ -259,7 +269,7 @@ resource "okta_group" "app_confluence_space_admin" {
 
   custom_profile_attributes = jsonencode({
     approval_type      = "ACCOUNT_ID"
-    approver_emails    = ["ernie-macmillan@hogwarts.com"]
+    approver_emails    = ["hermione-granger@hogwarts.com"]
     approval_logic     = "ANY"
     approval_threshold = 1
   })
@@ -271,7 +281,7 @@ resource "okta_group" "app_aws_prod_readonly" {
 
   custom_profile_attributes = jsonencode({
     approval_type      = "BOTH"
-    approver_emails    = ["hannah-abbott@hogwarts.com"]
+    approver_emails    = ["sirius-black@hogwarts.com"]
     approval_logic     = "ANY"
     approval_threshold = 1
   })
