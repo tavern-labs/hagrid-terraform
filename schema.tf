@@ -32,13 +32,13 @@ resource "okta_group_schema_property" "approval_type" {
   }
 }
 
-# Account IDs that can approve
-resource "okta_group_schema_property" "approval_account_ids" {
-  index       = "approval_account_ids"
-  title       = "Approval Account IDs"
-  type        = "array"       
-  array_type  = "string"      
-  description = "List of Okta User IDs authorized to approve for this group"
+# Approver emails that can approve
+resource "okta_group_schema_property" "approver_emails" {
+  index       = "approver_emails"
+  title       = "Approver Emails"
+  type        = "array"
+  array_type  = "string"
+  description = "List of email addresses authorized to approve for this group"
 }
 
 # One approver or all approvers
