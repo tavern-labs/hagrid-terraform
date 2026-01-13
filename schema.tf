@@ -1,4 +1,5 @@
 # Create the metadata field for who must approve
+/*
 resource "okta_group_schema_property" "approval_type" {
   index       = "approval_type"
   title       = "Approval Type"
@@ -80,5 +81,35 @@ resource "okta_group_schema_property" "approval_threshold" {
 
   lifecycle {
     ignore_changes = all
+  }
+}
+*/
+
+# Tell Terraform to stop managing these, but do NOT delete them in Okta
+removed {
+  from = okta_group_schema_property.approval_type
+  lifecycle {
+    destroy = false
+  }
+}
+
+removed {
+  from = okta_group_schema_property.approval_emails
+  lifecycle {
+    destroy = false
+  }
+}
+
+removed {
+  from = okta_group_schema_property.approval_logic
+  lifecycle {
+    destroy = false
+  }
+}
+
+removed {
+  from = okta_group_schema_property.approval_threshold
+  lifecycle {
+    destroy = false
   }
 }
