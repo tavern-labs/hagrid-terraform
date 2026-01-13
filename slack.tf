@@ -74,4 +74,8 @@ resource "okta_app_group_assignment" "slack" {
 
   app_id   = okta_app_saml.slack.id
   group_id = okta_group.app_groups[each.value].id
+  depends_on = [
+    okta_app_saml.slack,
+  ]
+  
 }
