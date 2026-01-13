@@ -70,6 +70,8 @@ jobs:
         run: terraform init
 
       - name: Final Safety Plan
+        env:
+          TF_LOG: TRACE
         run: terraform plan -out=deploy.tfplan -input=false
 
       - name: Terraform Apply
