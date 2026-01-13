@@ -71,6 +71,8 @@ jobs:
 
       - name: Final Safety Plan
         run: terraform plan -out=deploy.tfplan -input=false
+        env:
+          TF_LOG: TRACE 
 
       - name: Terraform Apply
-        run: TF_LOG=TRACE terraform apply -input=false -auto-approve deploy.tfplan
+        run: terraform apply -input=false -auto-approve deploy.tfplan
