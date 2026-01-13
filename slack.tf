@@ -56,3 +56,26 @@ resource "okta_app_saml" "slack" {
     ]
   }
 }
+
+# =============================================================================
+# Slack App Group Assignments
+# =============================================================================
+
+locals {
+  slack_group_assignments = {
+    member    = "app_slack_member"
+    admin     = "app_slack_admin"
+    org_admin = "app_slack_org_admin"
+  }
+}
+
+resource "okta_app_group_assignment" "slack" {
+  for_each = local.slack_group_assignments
+
+  app_id   = okta_app_saml.slack.id
+  group_id = okta_group.app_groups[each.value].id
+  depends_on = [
+    okta_app_saml.slack,
+  ]
+  
+}
