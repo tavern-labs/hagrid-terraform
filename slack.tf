@@ -61,6 +61,7 @@ resource "okta_app_saml" "slack" {
 # Slack App Group Assignments
 # =============================================================================
 
+/*
 locals {
   slack_group_assignments = {
     member    = "app_slack_member"
@@ -79,3 +80,4 @@ resource "okta_app_group_assignment" "slack" {
   ]
   
 }
+*/
