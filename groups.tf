@@ -220,6 +220,7 @@ locals {
   }
 }
 
+/*
 # Create all application access groups using for_each
 resource "okta_group" "app_groups" {
   for_each = local.okta_groups
@@ -235,6 +236,7 @@ resource "okta_group" "app_groups" {
     okta_group_schema_property.approval_threshold
   ]
 
+
   # Build custom_profile_attributes, filtering out null values
   custom_profile_attributes = jsonencode({
     for k, v in {
@@ -245,3 +247,15 @@ resource "okta_group" "app_groups" {
     } : k => v if v != null
   })
 }
+*/
+
+removed {
+  from = okta_group.app_groups
+  lifecycle {
+    destroy = false # This ensures the groups STAY in Okta
+  }
+}
+
+
+
+

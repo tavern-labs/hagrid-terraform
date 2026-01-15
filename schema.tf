@@ -1,4 +1,5 @@
 # Create the metadata field for who must approve
+/*
 resource "okta_group_schema_property" "approval_type" {
   index       = "approval_type"
   title       = "Approval Type"
@@ -30,6 +31,10 @@ resource "okta_group_schema_property" "approval_type" {
     const = "NONE"
     title = "No Approval Required"
   }
+
+  lifecycle {
+    ignore_changes = all
+  }
 }
 
 # Approval emails that can approve
@@ -39,6 +44,10 @@ resource "okta_group_schema_property" "approval_emails" {
   type        = "array"
   array_type  = "string"
   description = "List of email addresses authorized to approve for this group"
+
+  lifecycle {
+    ignore_changes = all
+  }
 }
 
 # One approver or all approvers
@@ -57,6 +66,10 @@ resource "okta_group_schema_property" "approval_logic" {
     const = "ANY"
     title = "Any Condition Can Be Met"
   }
+
+  lifecycle {
+    ignore_changes = all
+  }
 }
 
 # How many approvals are required
@@ -65,4 +78,38 @@ resource "okta_group_schema_property" "approval_threshold" {
   title       = "Approval Threshold"
   type        = "integer"
   description = "Number of approvals needed. If 0 and logic is ALL, it defaults to the full count of the ID list."
+
+  lifecycle {
+    ignore_changes = all
+  }
+}
+*/
+
+# Tell Terraform to stop managing these, but do NOT delete them in Okta
+removed {
+  from = okta_group_schema_property.approval_type
+  lifecycle {
+    destroy = false
+  }
+}
+
+removed {
+  from = okta_group_schema_property.approval_emails
+  lifecycle {
+    destroy = false
+  }
+}
+
+removed {
+  from = okta_group_schema_property.approval_logic
+  lifecycle {
+    destroy = false
+  }
+}
+
+removed {
+  from = okta_group_schema_property.approval_threshold
+  lifecycle {
+    destroy = false
+  }
 }
