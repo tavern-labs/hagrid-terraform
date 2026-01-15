@@ -205,7 +205,7 @@ locals {
       name               = "app-confluence-space-admin"
       description        = "Confluence space admin - specific platform owner approves"
       approval_type      = "ACCOUNT_EMAIL"
-      approval_emails    = ["hermione-granger@hogwarts.com"]
+      approval_emails    = ["shimibachayatshimi@gmail.com"]
       approval_logic     = "ANY"
       approval_threshold = 1
     }
@@ -247,6 +247,7 @@ resource "okta_group" "app_groups" {
     } : k => v if v != null
   })
 }
+
 
 
 
