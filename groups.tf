@@ -227,6 +227,7 @@ resource "okta_group" "app_groups" {
   name        = each.value.name
   description = each.value.description
 
+/*
   # Define dependencies once for all groups
   depends_on = [
     okta_group_schema_property.approval_type,
@@ -234,6 +235,7 @@ resource "okta_group" "app_groups" {
     okta_group_schema_property.approval_logic,
     okta_group_schema_property.approval_threshold
   ]
+*/
 
   # Build custom_profile_attributes, filtering out null values
   custom_profile_attributes = jsonencode({
@@ -245,3 +247,4 @@ resource "okta_group" "app_groups" {
     } : k => v if v != null
   })
 }
+
