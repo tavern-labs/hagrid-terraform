@@ -37,11 +37,6 @@ jobs:
         with:
           terraform_wrapper: false
 
-      - name: Clear Provider Cache
-        run: |
-          rm -rf .terraform/
-          rm -f .terraform.lock.hcl
-
       - name: Terraform Init
         run: terraform init
 
@@ -70,11 +65,6 @@ jobs:
 
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
-      
-      - name: Clear Provider Cache
-        run: |
-          rm -rf .terraform/
-          rm -f .terraform.lock.hcl
 
       - name: Terraform Init
         run: terraform init
